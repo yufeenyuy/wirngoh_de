@@ -52,7 +52,7 @@ def checkschema_and_table(schemaname,tablename):
         return result
     return result,checktable(tablename)
 
-#Delete rows from table that are earlier that 5 day
+#Delete rows from table that are earlier that 5 days
 def delete_rows(schemaname, tablename, tablecol) -> None:
     result = checkschema_and_table(schemaname,tablename)
     print(result)

@@ -17,8 +17,8 @@ password = ''
 port = 22
 
 rootdir = ''
-target_folder_or_directory = 'incomingdata/clients/fiegelogistics/transportdata/'
-destination_folder_or_directory = 'incomingdata/clients/fiegelogistics/archive/'
+target_folder_or_directory = 'directory where the data is stored on the server'
+destination_folder_or_directory = 'directory where the data should go on the server'
 
 # create connection to server and open it.
 def openserver():

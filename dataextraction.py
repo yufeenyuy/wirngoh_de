@@ -17,6 +17,7 @@ parameter = {
 }
 
 cities = ["bielefeld","hamm","paderborn","essen","dortmund","köln","düsseldorf"]
+
 ### If getting business data is your target then check whether the response is positive and work with the data retrieved.
 def getbusinesses() -> pd.DataFrame:
     dflist = []
@@ -43,6 +44,7 @@ def getbusinesses() -> pd.DataFrame:
         df = pd.concat([df,dfs], ignore_index=True)
     return df
 
+# get reviews for every business retrieved
 def getbusinessreviews() -> pd.DataFrame: 
     bids,id,review,created_at,rating = [],[],[],[],[]
     businessids = getbusinesses()['id']
