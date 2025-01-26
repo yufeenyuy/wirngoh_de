@@ -52,5 +52,5 @@ The data retrieved is later ingested in a postgresql database. In order to use t
 --sparkandpyspark.py
 In this file i learned the basics of spark and pyspark.
 
-
-
+--main.py
+In this script the data from different sources i.e exchange rate, sharepoint and yelp, are ingested.
