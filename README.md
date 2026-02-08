@@ -29,28 +29,9 @@ about the behavior of a code during execution. This can help to track errors and
 --dataextraction.py
  In this script i practiced how to extract data from yelp using the yelp fussion rest api. The data extracted is later ingested in a postgresql database. This is done in the main.py script. Yelp is a platform that advertises businesses and provide user-generated reviews for these businesses. Yelp provide developers with APIs that allow them to querry their public database. This public database is accessible via Yelp fussion or GraphQl. There is a comprehensive documentation to help you get started with Yelp fussion and GraphQl. You can find this via the following links.
 
-Yelp Developer Documentation:  https://docs.developer.yelp.com/docs/getting-started.
-Yelp fussion API: REST API with several endpoints for querying the public database.
-GraphQl: An efficient way to query NoSQL graph databases as it offers the possibility to make several requests with a single query, unlike REST.
-
---exchangerate.py
-In this script i implemented a scraper to get exchange rate data from exchangerate.org. It is important to explicitly state it here that it is illegal to scrape any site without consent of the owners site. In the event of any legal issues, i take no responsibility 
-for anyone who uses my script to scrape data from exchangerate.org.
-
---fake_microfinance_data.py
-I created fake sample data in the context of microfinance. The data is used to create a power bi demo report.
-
 --regex.py
 In this script, i learned the basics of writing regular expressions in python.
 
---sharepoint.py
-Sharepoint is a microsoft online service that can be used for internal communication as well as managing files between user groups and
-even departments. Sometimes data used for analysis can be stored in sharepoint. Since this is not a database, it might be necessary to
-move data into a database for teams or departments considering scalability and better data management. In this script i used the graph api endpoint provided by microsoft to access my personal sharepoint subscription to read data from a particular sharepoint site.
-The data retrieved is later ingested in a postgresql database. In order to use the graph api endpoint one must have a microsoft azure subscrition and a Microsoft Entra ID which can be created in azure. Additional one must create an app in microsoft azure to get login credentials necessary to access sharepoint programatically. When creating the app consider storing the client secrete where you can retrieve it for use because you will not be able to retrieve this in azure once you complete the process of creating the app. Also consider granting necessary read and write permissions to this app as it is necessary for interacting with sharepoint. The data retrieved from share point is ingested in a postgresql database. This is done in main.py.
-
---sparkandpyspark.py
-In this file i learned the basics of spark and pyspark.
 
 --main.py
 In this script the data from different sources i.e exchange rate, sharepoint and yelp, are ingested.

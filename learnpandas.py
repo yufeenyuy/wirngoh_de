@@ -3,7 +3,6 @@ import pandas as pd
 import logging as lg
 import random
 import datetime as dt
-import os
 
 
 
@@ -12,6 +11,7 @@ iris = load_iris()
 df = pd.DataFrame(data=iris.data, columns=iris.feature_names,) 
 df['target'] = iris.target
 df['target_names'] = df['target'].apply(lambda x: iris.target_names[x])
+
 
 """observe the first 7 rows and all columns of the data"""
 print(df.head(7))
