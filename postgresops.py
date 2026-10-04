@@ -3,6 +3,8 @@ from sqlalchemy import create_engine
 import datetime as dt
 import pandas as pd
 import logging as lg
+import os
+from sqlalchemy.engine import URL
 
 
 lg.basicConfig(filename='dataingest.log', encoding='utf-8', format='%(levelname)s: %(asctime)s %(message)s.', datefmt='%d.%m.%Y %I:%M:%S', level=lg.DEBUG)
@@ -26,15 +28,36 @@ def updatedf(df1, df2):
     return df1
 
 
-user = ''
-db_name = ''
-host = ''
-port = 5432
-password = ''
+user = os.getenv('DB_USER', '')
+db_name = os.getenv('DB_NAME', '')
+host = os.getenv('DB_HOST', '')
+port = int(os.getenv('DB_PORT') or '5432')
+password = os.getenv('DB_PASSWORD', '')
+
+missing_settings = [
+    name for name, value in (
+        ('DB_HOST', host),
+        ('DB_NAME', db_name),
+        ('DB_USER', user),
+        ('DB_PASSWORD', password),
+    )
+    if not value
+]
+if missing_settings:
+    raise RuntimeError(
+        f'Missing required database environment variables: {", ".join(missing_settings)}'
+    )
 
 conn = ps.connect(host = host, port = port,dbname = db_name, user = user, password = password)
 
-connstr = f'postgresql+psycopg2://{user}:{password}@{host}:{port}/{db_name}'
+connstr = URL.create(
+    'postgresql+psycopg2',
+    username=user,
+    password=password,
+    host=host,
+    port=port,
+    database=db_name,
+)
 
 engine = create_engine(connstr)
 
@@ -73,7 +96,5 @@ def ingest_data(df,schemaname, tablename):
         df.to_sql(tablename, con=engine,index=False, schema= schemaname)
         lg.info(f'{tablename} has been ingested in schema:{schemaname}')
     return
-
-
 
 

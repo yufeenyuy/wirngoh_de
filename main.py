@@ -1,6 +1,4 @@
-import sharepoint as sp
 from dataextraction import getbusinesses, getbusinessreviews
-from exchangerate import get_exchangerate
 import postgresops as ps
 import logging as lgs
 
@@ -24,6 +22,8 @@ log.addHandler(flg)
 def getdata(*argv):
     #*argv is a tuple that contain a single list. This list are enviromental variables
     if argv[0][1] == 'confi':
+        import sharepoint as sp
+
         data = sp.get_data()  # returns a dictionary of dataframes
         log.info('data retrieved')
         for k,df in data.items():
@@ -53,6 +53,8 @@ def getdata(*argv):
         log.info('Now closing database connection.')
         log.info('Database connection closed.')
     elif argv[0][1] == 'cfa_exchangerate':
+        from exchangerate import get_exchangerate
+
         log.info('Starting central africa franc web scraping and data ingestion...')
         print(get_exchangerate())
         ps.ingest_data(df= ps.col2str(get_exchangerate()), schemaname='public', tablename='cfa_exchangerate')
@@ -71,4 +73,3 @@ if __name__ == '__main__':
         ps.conn.commit()
         ps.conn.close()
         
-

@@ -1,11 +1,13 @@
 import pandas as pd
 import requests
 import json
+import os
 
  
 'Only required at the beginning'
+api_key = os.getenv('YELP_API_KEY', '')
 headers = {
-    'Authorization': '',
+    'Authorization': f'Bearer {api_key}' if api_key else '',
     'accept': 'application/json'
 }
 
@@ -20,6 +22,9 @@ cities = ["bielefeld","hamm","paderborn","essen","dortmund","köln","düsseldorf
 
 ### If getting business data is your target then check whether the response is positive and work with the data retrieved.
 def getbusinesses() -> pd.DataFrame:
+    if not headers['Authorization']:
+        raise RuntimeError('YELP_API_KEY must be set to retrieve Yelp data.')
+
     dflist = []
     def getinitialdf():
         try:
